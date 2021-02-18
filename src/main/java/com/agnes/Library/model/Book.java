@@ -1,4 +1,4 @@
-package com.agnes.Library;
+package com.agnes.Library.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
