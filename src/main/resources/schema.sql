@@ -1,0 +1,17 @@
+CREATE TABLE USER (
+    pesel INTEGER PRIMARY KEY,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE BOOK (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    type VARCHAR(50) NULL,
+    yearOfPublish SMALLINT,
+    borrowed BOOLEAN,
+    user_id INTEGER NULL
+
+);
+
+

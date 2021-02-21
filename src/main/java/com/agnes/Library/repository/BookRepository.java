@@ -1,15 +1,15 @@
 package com.agnes.Library.repository;
 
 import com.agnes.Library.model.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface BookRepository extends MongoRepository<Book, String> {
-    List<Book> findByTitleContaining(String title);
+public interface BookRepository extends JpaRepository<Book, Integer> {
+    /*List<Book> findByTitleContaining(String title);
     List<Book> findByType(String type);
     List<Book> findByYearOfPublish(Short yearOfPublish);
-    List<Book> findByBorrowed(boolean borrowed);
+    List<Book> findByBorrowed(boolean borrowed);*/
 }

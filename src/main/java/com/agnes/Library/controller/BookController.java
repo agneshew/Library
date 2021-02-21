@@ -2,7 +2,8 @@ package com.agnes.Library.controller;
 
 import com.agnes.Library.model.Book;
 import com.agnes.Library.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.agnes.Library.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,23 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8081")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 public class BookController {
 
-    @Autowired
-    BookRepository bookRepository;
+
+    private final BookService bookService;
 
     @GetMapping("/books")
-    public ResponseEntity<List<Book>> getAllBooks(@RequestParam(required = false) String title) {
+    public ResponseEntity<List<Book>> getAllBooks() {
         try {
             List<Book> books = new ArrayList<Book>();
-
-            if (title == null)
-                bookRepository.findAll().forEach(books::add);
-            else
-                bookRepository.findByTitleContaining(title).forEach(books::add);
+            bookService.getAllBooks().forEach(books::add);
 
             if (books.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -40,8 +37,8 @@ public class BookController {
         }
     }
     @GetMapping("/books/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable("id") String id) {
-        Optional<Book> bookOptional = bookRepository.findById(id);
+    public ResponseEntity<Book> getBookById(@PathVariable("id") Integer id) {
+        Optional<Book> bookOptional = Optional.ofNullable(bookService.getSingleBook(id));
 
         if (bookOptional.isPresent()) {
             return new ResponseEntity<>(bookOptional.get(), HttpStatus.OK);
@@ -50,25 +47,10 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/books/borrowed")
-    public ResponseEntity<List<Book>> findByBorrowed() {
-
-        try {
-            List<Book> books = bookRepository.findByBorrowed(true);
-
-            if (books.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(books, HttpStatus.OK);
-        }
-        catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    @PostMapping("/books")
+    /*@PostMapping("/books")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         try {
-            Book bookbook = bookRepository.save(new Book(book.getTitle(), book.getType(), book.getYearOfPublish(),  false));
+            Book bookbook = bookService.(new Book(book.getTitle(), book.getType(), book.getYearOfPublish(), false));
             return new ResponseEntity<>(bookbook, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -99,7 +81,7 @@ public class BookController {
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 
 }
 

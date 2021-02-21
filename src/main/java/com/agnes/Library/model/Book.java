@@ -1,28 +1,27 @@
 package com.agnes.Library.model;
 
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Getter;
+import lombok.Setter;
 
-@Document(collection = "books")
-@Data
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Getter
+@Setter
+@Entity
 public class Book {
 
     @Id
-    private String id;
+    private int id;
     private String title;
     private String type;
     private Short yearOfPublish;
     private boolean borrowed;
+    @OneToOne
+    private User user;
 
-    public Book() {
 
-    }
-
-    public Book(String title, String type, Short yearOfPublish, boolean borrowed) {
-        this.title = title;
-        this.type = type;
-        this.yearOfPublish = yearOfPublish;
-        this.borrowed = borrowed;
-    }
 }
