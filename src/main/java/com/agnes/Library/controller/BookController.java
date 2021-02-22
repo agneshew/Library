@@ -45,7 +45,7 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PostMapping("/books")
+    @PostMapping("/book/newbook")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         try {
             Book newBook = bookRepository.save(book);

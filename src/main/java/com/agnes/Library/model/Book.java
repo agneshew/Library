@@ -23,7 +23,7 @@ public class Book {
     @ManyToOne
     private Author author;
     @OneToOne
-    private User user;
+    private Member member;
 
 
 }

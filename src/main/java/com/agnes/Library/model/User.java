@@ -1,23 +1,7 @@
 package com.agnes.Library.model;
 
-import lombok.Getter;
-import lombok.Setter;
+public class User {
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
-@Entity
-@Getter
-@Setter
-public class User extends PersonalData{
-
-    @Id
-    private int pesel;
-    private int phoneNumber;
-    private String email;
-    private String password;
-    @OneToOne
-    private Book book;
-
+    private String firstName;
+    private String lastName;
 }

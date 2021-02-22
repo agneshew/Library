@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Author extends PersonalData {
+public class Author extends User {
 
     @Id
     private int id;
