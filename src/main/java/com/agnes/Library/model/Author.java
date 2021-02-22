@@ -11,12 +11,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Author {
+public class Author extends PersonalData {
 
     @Id
     private int id;
-    private String firstName;
-    private String lastName;
     @OneToMany
     private List<Book> books;
+
+
 }

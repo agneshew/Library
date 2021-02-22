@@ -13,7 +13,7 @@ CREATE TABLE BOOK (
     title VARCHAR(100) NOT NULL,
     yearOfPublish SMALLINT,
     borrowed BOOLEAN,
-    user_id INTEGER NULL,
+    user_id INTEGER NULL
 
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE BOOKTYPE (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     type VARCHAR(50),
     book_id INTEGER NOT NULL
-)
+);
 
 
 

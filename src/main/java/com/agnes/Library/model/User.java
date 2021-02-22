@@ -10,12 +10,10 @@ import javax.persistence.OneToOne;
 @Entity
 @Getter
 @Setter
-public class User {
+public class User extends PersonalData{
 
     @Id
     private int pesel;
-    private String firstName;
-    private String lastName;
     private int phoneNumber;
     private String email;
     private String password;
