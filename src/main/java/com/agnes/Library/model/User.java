@@ -16,6 +16,7 @@ public class User {
     private int pesel;
     private String firstName;
     private String lastName;
+    private int phoneNumber;
     @OneToOne
     private Book book;
 

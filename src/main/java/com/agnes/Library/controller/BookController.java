@@ -2,7 +2,6 @@ package com.agnes.Library.controller;
 
 import com.agnes.Library.model.Book;
 import com.agnes.Library.repository.BookRepository;
-import com.agnes.Library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +16,13 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class BookController {
 
-
-    private final BookService bookService;
+    private final BookRepository bookRepository;
 
     @GetMapping("/books")
     public ResponseEntity<List<Book>> getAllBooks() {
         try {
             List<Book> books = new ArrayList<Book>();
-            bookService.getAllBooks().forEach(books::add);
+            bookRepository.findAll().forEach(books::add);
 
             if (books.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -38,7 +36,7 @@ public class BookController {
     }
     @GetMapping("/books/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable("id") Integer id) {
-        Optional<Book> bookOptional = Optional.ofNullable(bookService.getSingleBook(id));
+        Optional<Book> bookOptional = bookRepository.findById(id);
 
         if (bookOptional.isPresent()) {
             return new ResponseEntity<>(bookOptional.get(), HttpStatus.OK);
@@ -47,33 +45,33 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    /*@PostMapping("/books")
+    @PostMapping("/books")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         try {
-            Book bookbook = bookService.(new Book(book.getTitle(), book.getType(), book.getYearOfPublish(), false));
-            return new ResponseEntity<>(bookbook, HttpStatus.CREATED);
+            Book newBook = bookRepository.save(book);
+            return new ResponseEntity<>(newBook, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @PutMapping("/books/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable("id") String id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable("id") Integer id, @RequestBody Book book) {
         Optional<Book> bookOptional = bookRepository.findById(id);
 
         if (bookOptional.isPresent()) {
-            Book bookbook = bookOptional.get();
-            bookbook.setTitle(book.getTitle());
-            bookbook.setType(book.getType());
-            bookbook.setYearOfPublish(book.getYearOfPublish());
-            bookbook.setBorrowed(book.isBorrowed());
-            return new ResponseEntity<>(bookRepository.save(bookbook), HttpStatus.OK);
+            Book newBook = bookOptional.get();
+            newBook.setTitle(book.getTitle());
+            newBook.setType(book.getType());
+            newBook.setYearOfPublish(book.getYearOfPublish());
+            newBook.setBorrowed(book.isBorrowed());
+            return new ResponseEntity<>(bookRepository.save(newBook), HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     @DeleteMapping("books/{id}")
-    public ResponseEntity<HttpStatus> deleteBook(@PathVariable("id")String id) {
+    public ResponseEntity<HttpStatus> deleteBook(@PathVariable("id")Integer id) {
         try {
             bookRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -81,7 +79,7 @@ public class BookController {
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+    }
 
 }
 

@@ -1,7 +1,8 @@
 CREATE TABLE USER (
     pesel INTEGER PRIMARY KEY,
     firstName VARCHAR(100) NOT NULL,
-    lastName VARCHAR(100) NOT NULL
+    lastName VARCHAR(100) NOT NULL,
+    phoneNumber INTEGER NOT NULL
 );
 
 CREATE TABLE BOOK (
