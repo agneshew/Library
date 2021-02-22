@@ -5,21 +5,18 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
-@Entity
 @Getter
 @Setter
-public class User {
+@Entity
+public class Author {
 
     @Id
-    private int pesel;
+    private int id;
     private String firstName;
     private String lastName;
-    private int phoneNumber;
-    private String email;
-    private String password;
-    @OneToOne
-    private Book book;
-
+    @OneToMany
+    private List<Book> books;
 }
