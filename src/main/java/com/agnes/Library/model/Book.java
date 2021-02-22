@@ -25,5 +25,4 @@ public class Book {
     @OneToOne
     private Member member;
 
-
 }

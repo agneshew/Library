@@ -18,4 +18,5 @@ public class BookType {
     private String type;
     @OneToMany
     private List<Book> books;
+
 }

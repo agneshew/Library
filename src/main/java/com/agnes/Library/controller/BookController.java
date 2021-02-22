@@ -61,7 +61,7 @@ public class BookController {
         if (bookOptional.isPresent()) {
             Book newBook = bookOptional.get();
             newBook.setTitle(book.getTitle());
-            //newBook.setType(book.getType());
+            newBook.setBookType(book.getBookType());
             newBook.setYearOfPublish(book.getYearOfPublish());
             newBook.setBorrowed(book.isBorrowed());
             return new ResponseEntity<>(bookRepository.save(newBook), HttpStatus.OK);
