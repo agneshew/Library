@@ -4,7 +4,7 @@
 * [Introduction](#introduction)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [Api Documentation](#Api)
+* [Documentation](#Documentation)
 * [Endpoints](#endpoints)
 
 ## Introduction
@@ -22,9 +22,9 @@ Library for a data management application containing the books that are in the l
 ## Setup
 Go to http=//localhost:8080/h2-console to see database
 
-## Api Documentation
+## Documentation
 
-Go to http://localhost:8080/swagger-ui.html#/ to see documentation 
+Go to http://localhost:8080/swagger-ui.html#/ to see API documentation 
 
 ## Endpoints
 * GET - get all books "http=//localhost:8080/api/books"
