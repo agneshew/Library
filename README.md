@@ -11,21 +11,25 @@ Library for a data management application containing the books that are in the l
 
 #### The application is under development.
 
-## Technologies
-Backend: 
+## Technologies 
 * Java 13
 * Spring Boot version 2.4.2
 * Lombok 
 * H2 database
+* Swagger 2
 
 ## Setup
-When you run project, go to http=//localhost:8080/h2-console
+Go to http=//localhost:8080/h2-console to see database
 
-## Endpoints
-* get all books "http=//localhost:8080/api/books"
-* get book by id "http=//localhost:8080/api/books/{id}"
-* add new book "http=//localhost:8080/api/book/newbook"
-* update book "http=//localhost:8080/api/books/{id}"
-* delete book "http=//localhost:8080/api/books/{id}"
+## Api Documentation
+
+Go to http://localhost:8080/swagger-ui.html#/ to see documentation 
+
+### Endpoints
+* GET - get all books "http=//localhost:8080/api/books"
+* GET - get book by id "http=//localhost:8080/api/books/{id}"
+* POST - add new book "http=//localhost:8080/api/book/newbook"
+* PUT - update book "http=//localhost:8080/api/books/{id}"
+* DELETE - delete book "http=//localhost:8080/api/books/{id}"
 
 
