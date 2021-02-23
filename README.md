@@ -4,6 +4,7 @@
 * [Introduction](#introduction)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Api Documentation](#Api)
 * [Endpoints](#endpoints)
 
 ## Introduction
@@ -25,7 +26,7 @@ Go to http=//localhost:8080/h2-console to see database
 
 Go to http://localhost:8080/swagger-ui.html#/ to see documentation 
 
-### Endpoints
+## Endpoints
 * GET - get all books "http=//localhost:8080/api/books"
 * GET - get book by id "http=//localhost:8080/api/books/{id}"
 * POST - add new book "http=//localhost:8080/api/book/newbook"
