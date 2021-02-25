@@ -18,5 +18,4 @@ public class Author extends User {
     @OneToMany
     private List<Book> books;
 
-
 }
