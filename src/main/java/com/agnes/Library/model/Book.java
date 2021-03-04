@@ -1,5 +1,6 @@
 package com.agnes.Library.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import javax.persistence.OneToOne;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @Entity
 public class Book {
 
