@@ -13,15 +13,17 @@ import java.util.List;
 public final class Author {
 
     @Id
-    @GeneratedValue
-    @Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotNull
-    @Column(name="FIRST NAME")
     private String firstName;
     @NotNull
-    @Column(name="LAST NAME")
     private String lastName;
-    @OneToMany
+
+    @OneToMany(mappedBy = "author", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Book> books;
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
 }
