@@ -1,17 +1,15 @@
 package com.agnes.Library.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-@Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Book {
 
@@ -20,11 +18,10 @@ public class Book {
     private String title;
     private Short yearOfPublish;
     private boolean borrowed;
-    @ManyToOne
-    private BookType bookType;
+
     @ManyToOne
     private Author author;
-    @OneToOne
-    private Member member;
+//    @OneToOne
+//    private Member member;
 
 }
