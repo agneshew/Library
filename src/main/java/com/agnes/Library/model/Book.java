@@ -2,10 +2,8 @@ package com.agnes.Library.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Setter
 @AllArgsConstructor
@@ -14,14 +12,23 @@ import javax.persistence.OneToOne;
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
     private String title;
     private Short yearOfPublish;
     private boolean borrowed;
 
     @ManyToOne
+    @JoinColumn(name = "AUTHOR_ID")
     private Author author;
-//    @OneToOne
-//    private Member member;
+
+    @OneToOne (cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+
+
 
 }

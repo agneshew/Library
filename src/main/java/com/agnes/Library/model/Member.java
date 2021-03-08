@@ -3,12 +3,10 @@ package com.agnes.Library.model;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,20 +14,27 @@ public class Member  {
 
     @Id
     @NotNull
-    @Column(name = "PESEL", unique = true)
-    private int pesel;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @NotNull
-    @Column(name = "Phone number", unique = true)
-    private int phoneNumber;
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
+    private int phoneNumber;
+    @NotNull
     private String email;
-    private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER)
     private Book book;
 
-
-
+    public Member(String firstName, String lastName,
+                  int phoneNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }
