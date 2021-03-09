@@ -2,6 +2,7 @@ package com.agnes.Library.controller;
 
 import com.agnes.Library.model.Book;
 import com.agnes.Library.repository.BookRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/api")
 public class BookController {
 
