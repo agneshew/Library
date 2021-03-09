@@ -9,9 +9,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "AUTHOR")
 public final class Author {
 
     @Id
