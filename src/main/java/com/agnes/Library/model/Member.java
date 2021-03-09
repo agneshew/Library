@@ -1,23 +1,39 @@
 package com.agnes.Library.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-public class Member extends User {
+@NoArgsConstructor
+public class Member  {
 
     @Id
-    private int pesel;
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @NotNull
+    private String firstName;
+    @NotNull
+    private String lastName;
+    @NotNull
     private int phoneNumber;
+    @NotNull
     private String email;
-    private String password;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER)
     private Book book;
 
+    public Member(String firstName, String lastName,
+                  int phoneNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }

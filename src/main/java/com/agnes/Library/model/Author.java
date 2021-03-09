@@ -1,22 +1,37 @@
 package com.agnes.Library.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import lombok.*;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @Entity
-public class Author extends User {
+@NoArgsConstructor
+public final class Author {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToMany
-    private List<Book> books;
+    @NotNull
+    private String firstName;
+    @NotNull
+    private String lastName;
 
+    @OneToMany(targetEntity = Book.class,
+            mappedBy = "author",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY)
+    private List<Book> books = new ArrayList<>();
 
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
 }
