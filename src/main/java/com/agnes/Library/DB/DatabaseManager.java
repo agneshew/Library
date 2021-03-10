@@ -6,7 +6,11 @@ import com.agnes.Library.model.Member;
 import com.agnes.Library.repository.AuthorRepository;
 import com.agnes.Library.repository.BookRepository;
 import com.agnes.Library.repository.MemberRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
+@AllArgsConstructor
 public class DatabaseManager {
 
     private AuthorRepository authorRepository;
