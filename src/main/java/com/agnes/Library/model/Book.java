@@ -15,12 +15,11 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotNull
     private String title;
     private int yearOfPublish;
     private boolean borrowed;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "author_id")
     private Author author;
 
@@ -29,7 +28,7 @@ public class Book {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Book(@NotNull String title, int yearOfPublish,
+    public Book(String title, int yearOfPublish,
                 boolean borrowed) {
         this.title = title;
         this.yearOfPublish = yearOfPublish;

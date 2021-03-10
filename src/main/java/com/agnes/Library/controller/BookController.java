@@ -33,11 +33,11 @@ public class BookController {
     }
 
     @GetMapping("/books/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
         return ResponseEntity.ok(databaseManager.getBookById(id));
 
     }
-    @PostMapping("/books/newbook")
+    @PostMapping("/books/addNewBook")
     public ResponseEntity addNewBook(@RequestBody Book book) {
 
         Optional<Integer> authorId = Optional.ofNullable(book.getAuthor().getId());
