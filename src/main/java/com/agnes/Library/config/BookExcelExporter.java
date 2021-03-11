@@ -14,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class BookExcelExporter {
+
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private Iterable<Book> bookIterable;
@@ -40,6 +41,7 @@ public class BookExcelExporter {
         createCell(row, 3, "Borrowed", style);
         createCell(row, 4, "Author", style);
     }
+
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
         sheet.autoSizeColumn(columnCount);
         Cell cell = row.createCell(columnCount);
@@ -52,6 +54,7 @@ public class BookExcelExporter {
         }
         cell.setCellStyle(style);
     }
+
     private void writeDataLines() {
         int rowCount = 1;
 
@@ -71,6 +74,7 @@ public class BookExcelExporter {
             createCell(row, columnCount++, book.getAuthor().toString(), style);
         }
     }
+
     public void export(HttpServletResponse response) throws IOException {
         writeHeaderLine();
         writeDataLines();

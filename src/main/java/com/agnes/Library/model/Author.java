@@ -1,15 +1,11 @@
 package com.agnes.Library.model;
 
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -39,5 +35,10 @@ public final class Author {
 
     public void addBook(Book book) {
         books.add(book);
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName ;
     }
 }

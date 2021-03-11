@@ -23,16 +23,12 @@ public class DatabaseManager {
     private MemberRepository memberRepository;
     private AuthorRepository authorRepository;
 
-
     public Author getAuthorById(int id) {
         return authorRepository.findById(id).orElseGet(() -> null);
     }
 
     public void addBookToDB(Book book) {
         bookRepository.save(book);
-    }
-    public void deleteBookFromDB(Book book) {
-        bookRepository.delete(book);
     }
     public Iterable<Book> getAllBooksFromDB() {
         return bookRepository.findAll();

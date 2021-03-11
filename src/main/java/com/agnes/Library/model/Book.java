@@ -3,7 +3,6 @@ package com.agnes.Library.model;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Setter
@@ -29,10 +28,11 @@ public class Book {
     private Member member;
 
     public Book(String title, int yearOfPublish,
-                boolean borrowed) {
+                boolean borrowed, Author author) {
         this.title = title;
         this.yearOfPublish = yearOfPublish;
         this.borrowed = borrowed;
+        this.author = author;
     }
 
     @Override

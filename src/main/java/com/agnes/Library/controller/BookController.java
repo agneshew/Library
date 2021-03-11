@@ -31,9 +31,11 @@ public class BookController {
     private Author addAuthor(String firstName, String lastname) {
         return new Author(firstName, lastname);
     }
+
     private Optional<Author> isAuthorExistInDatabase(Integer authorId) {
         return Optional.ofNullable(databaseManager.getAuthorById(authorId));
     }
+
     @GetMapping("/books/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
@@ -61,6 +63,7 @@ public class BookController {
         return ResponseEntity.ok(databaseManager.getBookById(id));
 
     }
+
     @PostMapping("/books/addNewBook")
     public ResponseEntity addNewBook(@RequestBody Book book) {
 
