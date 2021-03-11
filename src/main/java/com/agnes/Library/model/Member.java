@@ -15,7 +15,6 @@ public class Member  {
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     @NotNull
     private String firstName;
     @NotNull
