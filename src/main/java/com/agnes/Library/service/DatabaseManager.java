@@ -1,4 +1,4 @@
-package com.agnes.Library.DB;
+package com.agnes.Library.service;
 
 import com.agnes.Library.model.Author;
 import com.agnes.Library.model.Book;
@@ -7,15 +7,22 @@ import com.agnes.Library.repository.AuthorRepository;
 import com.agnes.Library.repository.BookRepository;
 import com.agnes.Library.repository.MemberRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 @Component
 @AllArgsConstructor
 public class DatabaseManager {
 
-    private AuthorRepository authorRepository;
+    @Autowired
     private BookRepository bookRepository;
     private MemberRepository memberRepository;
+    private AuthorRepository authorRepository;
+
 
     public Author getAuthorById(int id) {
         return authorRepository.findById(id).orElseGet(() -> null);

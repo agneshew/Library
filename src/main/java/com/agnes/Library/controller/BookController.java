@@ -1,16 +1,23 @@
 package com.agnes.Library.controller;
 
-import com.agnes.Library.DB.DatabaseManager;
+import com.agnes.Library.config.BookExcelExporter;
+import com.agnes.Library.service.DatabaseManager;
 import com.agnes.Library.model.Author;
 import com.agnes.Library.model.Book;
 
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.URI;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -18,6 +25,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class BookController {
 
+    @Autowired
     private DatabaseManager databaseManager;
 
     private Author addAuthor(String firstName, String lastname) {
@@ -25,6 +33,22 @@ public class BookController {
     }
     private Optional<Author> isAuthorExistInDatabase(Integer authorId) {
         return Optional.ofNullable(databaseManager.getAuthorById(authorId));
+    }
+    @GetMapping("/books/export/excel")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=books_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        Iterable<Book> bookIterable = databaseManager.getAllBooksFromDB();
+
+        BookExcelExporter bookExcelExporter = new BookExcelExporter(bookIterable);
+
+        bookExcelExporter.export(response);
     }
 
     @GetMapping("/books")
