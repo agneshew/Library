@@ -8,7 +8,8 @@
 * [Endpoints](#endpoints)
 
 ## Introduction
-Library for a data management application containing the books that are in the library. Additionally, the application includes a user database. The combination of these two databases makes it possible to manage the borrowings of books.
+Library is a book management application. Currently, the application stores data relating to books and authors. It also allows you to generate a report - a list of books.
+Ultimately, the application will also contain the database of library users (members), while the database itself will be PostgreSQL.
 
 #### The application is under development.
 
@@ -18,6 +19,8 @@ Library for a data management application containing the books that are in the l
 * Lombok 
 * H2 database
 * Swagger 2
+* Spring Security
+* Apache POI OOXML
 
 ## Setup
 Go to http=//localhost:8080/h2-console to see database
@@ -27,10 +30,11 @@ Go to http=//localhost:8080/h2-console to see database
 Go to http://localhost:8080/swagger-ui.html#/ to see API documentation 
 
 ## Endpoints
+* GET - export to excel all books "http=//localhost:8080/api/books/export/excel"
 * GET - get all books "http=//localhost:8080/api/books"
 * GET - get book by id "http=//localhost:8080/api/books/{id}"
-* POST - add new book "http=//localhost:8080/api/book/newbook"
-* PUT - update book "http=//localhost:8080/api/books/{id}"
-* DELETE - delete book "http=//localhost:8080/api/books/{id}"
+* POST - add new book "http=//localhost:8080/api/book/addNewBook"
+* PUT - update book "http=//localhost:8080/api/books/update/{id}"
+* DELETE - delete book "http=//localhost:8080/api/books/delete/{id}"
 
 
