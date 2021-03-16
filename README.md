@@ -17,7 +17,7 @@ Ultimately, the application will also contain the database of library users (mem
 * Java 13
 * Spring Boot version 2.4.2
 * Lombok 
-* H2 database
+* MySQL
 * Swagger 2
 * Spring Security
 * Apache POI OOXML
