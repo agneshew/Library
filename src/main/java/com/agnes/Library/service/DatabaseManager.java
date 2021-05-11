@@ -8,6 +8,7 @@ import com.agnes.Library.repository.BookRepository;
 import com.agnes.Library.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class DatabaseManager {
         bookRepository.save(book);
     }
     public Iterable<Book> getAllBooksFromDB() {
-        return bookRepository.findAll();
+        return bookRepository.findAll(PageRequest.of(0,5));
     }
     public Book getBookById(int id) {
         return bookRepository.findById(id).orElseGet(() -> null);
