@@ -48,7 +48,7 @@ public class BookController {
 
         BookExcelExporter bookExcelExporter = new BookExcelExporter(bookIterable);
 
-        bookExcelExporter.export(response);
+        bookExcelExporter.export();
     }
 
     @GetMapping("/books")
