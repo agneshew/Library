@@ -1,9 +1,7 @@
 package com.agnes.Library.config;
 
-import java.io.IOException;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
 
 import com.agnes.Library.model.Book;
 import org.apache.poi.ss.usermodel.Cell;
@@ -75,14 +73,18 @@ public class BookExcelExporter {
         }
     }
 
-    public void export(HttpServletResponse response) throws IOException {
-        writeHeaderLine();
-        writeDataLines();
+    public void export () {
+        try {
+            writeHeaderLine();
+            writeDataLines();
 
-        ServletOutputStream outputStream = response.getOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
+            FileOutputStream outputStream = new FileOutputStream(new File("booklist.xlsx"));
+            workbook.write(outputStream);
+            workbook.close();
 
-        outputStream.close();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

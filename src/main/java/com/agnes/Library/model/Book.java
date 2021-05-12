@@ -18,6 +18,11 @@ public class Book {
     private int yearOfPublish;
     private boolean borrowed;
 
+
+    @Column(columnDefinition = "enum('EBOOK','AUDIOBOOK','PAPER')")
+    @Enumerated(EnumType.STRING)
+    private BookType bookType;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "author_id")
     private Author author;
@@ -28,11 +33,13 @@ public class Book {
     private Member member;
 
     public Book(String title, int yearOfPublish,
-                boolean borrowed, Author author) {
+                boolean borrowed, Author author,
+                BookType bookType) {
         this.title = title;
         this.yearOfPublish = yearOfPublish;
         this.borrowed = borrowed;
         this.author = author;
+        this.bookType = bookType;
     }
 
     @Override
@@ -41,11 +48,11 @@ public class Book {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return title.equals(book.title) &&
-                author.equals(book.author);
+                author.equals(book.author) && bookType.equals(book.bookType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author);
+        return Objects.hash(title, author, bookType);
     }
 }
