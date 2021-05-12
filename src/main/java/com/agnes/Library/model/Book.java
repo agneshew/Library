@@ -7,8 +7,8 @@ import java.util.Objects;
 
 @Setter
 @Getter
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -17,11 +17,6 @@ public class Book {
     private String title;
     private int yearOfPublish;
     private boolean borrowed;
-
-
-    @Column(columnDefinition = "enum('EBOOK','AUDIOBOOK','PAPER')")
-    @Enumerated(EnumType.STRING)
-    private BookType bookType;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "author_id")
@@ -32,14 +27,11 @@ public class Book {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Book(String title, int yearOfPublish,
-                boolean borrowed, Author author,
-                BookType bookType) {
+    public Book(String title, int yearOfPublish, boolean borrowed, Author author) {
         this.title = title;
         this.yearOfPublish = yearOfPublish;
         this.borrowed = borrowed;
         this.author = author;
-        this.bookType = bookType;
     }
 
     @Override
@@ -48,11 +40,11 @@ public class Book {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return title.equals(book.title) &&
-                author.equals(book.author) && bookType.equals(book.bookType);
+                author.equals(book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, bookType);
+        return Objects.hash(title, author);
     }
 }
