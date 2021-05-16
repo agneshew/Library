@@ -3,13 +3,12 @@
 ## Table of contents
 * [Introduction](#introduction)
 * [Technologies](#technologies)
-* [Setup](#setup)
 * [Documentation](#Documentation)
 * [Endpoints](#endpoints)
 
 ## Introduction
 Library is a book management application. Currently, the application stores data relating to books and authors. It also allows you to generate a report - a list of books.
-Ultimately, the application will also contain the database of library users (members), while the database itself will be PostgreSQL.
+Ultimately, the application will also contain the database of library users (members), while the database itself will be MySQL.
 
 #### The application is under development.
 
@@ -21,9 +20,6 @@ Ultimately, the application will also contain the database of library users (mem
 * Swagger 2
 * Spring Security
 * Apache POI OOXML
-
-## Setup
-Go to http=//localhost:8080/h2-console to see database
 
 ## Documentation
 
