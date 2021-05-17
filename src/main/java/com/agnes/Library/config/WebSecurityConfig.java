@@ -25,7 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(getPasswordEncoder().encode("admin"))
                 .roles("ADMIN"));
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().httpBasic().and().authorizeRequests().anyRequest().authenticated();

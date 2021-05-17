@@ -32,11 +32,9 @@ public final class Author {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
     public void addBook(Book book) {
         books.add(book);
     }
-
     @Override
     public String toString() {
         return firstName + " " + lastName ;

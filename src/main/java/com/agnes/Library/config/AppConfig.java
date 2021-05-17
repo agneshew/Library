@@ -19,7 +19,6 @@ public class AppConfig implements WebMvcConfigurer {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -28,7 +27,6 @@ public class AppConfig implements WebMvcConfigurer {
                 .paths(PathSelectors.any())
                 .build();
     }
-
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/lib/**").addResourceLocations("/lib/").setCachePeriod(0);

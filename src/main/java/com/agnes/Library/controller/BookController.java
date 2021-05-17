@@ -1,8 +1,6 @@
 package com.agnes.Library.controller;
 
-import com.agnes.Library.config.BookExcelExporter;
 import com.agnes.Library.service.BookService;
-import com.agnes.Library.model.Author;
 import com.agnes.Library.model.Book;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +23,6 @@ public class BookController {
 
     private BookService bookService;
 
-
     @GetMapping("/books/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
@@ -43,29 +40,26 @@ public class BookController {
     public ResponseEntity<Iterable<Book>> getAllBooksFromDB() {
         return ResponseEntity.ok(bookService.getAllBooksFromDB());
     }
-
     @GetMapping("/books/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
         return ResponseEntity.ok(bookService.getBookById(id));
     }
-
     @PostMapping("/books/addNewBook")
-    public ResponseEntity addNewBook(@RequestBody Book book) {
-        bookService.addBookToDB(book);
+    public ResponseEntity<Book> addNewBook(@RequestBody Book book) {
+        book = bookService.addBookToDB(book);
 
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/getBookById")
                 .path("/{id}")
                 .buildAndExpand(book.getId())
                 .toUri();
+
         return ResponseEntity.created(location).build();
     }
-
     @PutMapping("/books/update/{id}")
-    public ResponseEntity updateBookById(@RequestBody Book book, @PathVariable Integer id) {
-        bookService.updateBookInDB(book);
-        return ResponseEntity.ok("The book has been successfully saved");
+    public ResponseEntity<Book> updateBookById(@RequestBody Book book, @PathVariable Integer id) {
+        Book updatedBook = bookService.updateBookInDB(book);
+        return ResponseEntity.ok(updatedBook);
     }
-
     @DeleteMapping("/books/delete/{id}")
     public ResponseEntity<?> deleteBookById(@PathVariable Integer id) {
         bookService.deleteBookById(id);

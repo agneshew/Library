@@ -1,12 +1,8 @@
 package com.agnes.Library.service;
 
 import com.agnes.Library.config.BookExcelExporter;
-import com.agnes.Library.model.Author;
-import com.agnes.Library.model.Book;
-import com.agnes.Library.model.Member;
-import com.agnes.Library.repository.AuthorRepository;
-import com.agnes.Library.repository.BookRepository;
-import com.agnes.Library.repository.MemberRepository;
+import com.agnes.Library.model.*;
+import com.agnes.Library.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -14,10 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletResponse;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -40,7 +32,8 @@ public class BookService {
     private Author addAuthor(String firstName, String lastname) {
         return new Author(firstName, lastname);
     }
-    public void addBookToDB(Book book) {
+
+    public Book addBookToDB(Book book) {
         Optional<Integer> authorId = Optional.ofNullable(book.getAuthor().getId());
         if(authorId.isPresent()) {
             Optional<Author> optionalAuthor = isAuthorExistInDatabase(authorId.get());
@@ -54,7 +47,7 @@ public class BookService {
                 book.setAuthor(newAuthor);
             }
         }
-        bookRepository.save(book);
+        return bookRepository.save(book);
     }
     public Iterable<Book> getAllBooksFromDB() {
         return bookRepository.findAll(PageRequest.of(0,5));
@@ -65,7 +58,7 @@ public class BookService {
     public void deleteBookById(int id) {
         bookRepository.deleteById(id);
     }
-    public void updateBookInDB(Book book) {
+    public Book updateBookInDB(Book book) {
         Optional<Book> bookOptional = Optional.ofNullable(getBookById(book.getId()));
         if (bookOptional.isPresent()) {
             Book updatedBook = bookOptional.get();
@@ -75,6 +68,7 @@ public class BookService {
         } else {
             addBookToDB(book);
         }
+        return null;
     }
     public void exportBooksToFile () {
         Iterable<Book> bookIterable = getAllBooksFromDB();

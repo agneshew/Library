@@ -4,12 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import com.agnes.Library.model.Book;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 
 public class BookExcelExporter {
 
@@ -52,7 +48,6 @@ public class BookExcelExporter {
         }
         cell.setCellStyle(style);
     }
-
     private void writeDataLines() {
         int rowCount = 1;
 
@@ -72,7 +67,6 @@ public class BookExcelExporter {
             createCell(row, columnCount++, book.getAuthor().toString(), style);
         }
     }
-
     public void export () {
         try {
             writeHeaderLine();
