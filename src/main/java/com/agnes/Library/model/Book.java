@@ -1,5 +1,8 @@
 package com.agnes.Library.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,10 +12,12 @@ import java.util.Objects;
 @Getter
 @Entity
 @NoArgsConstructor
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("id")
     private int id;
     private String title;
     private int yearOfPublish;
@@ -27,12 +32,12 @@ public class Book {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Book(String title, int yearOfPublish, boolean borrowed, Author author) {
-        this.title = title;
-        this.yearOfPublish = yearOfPublish;
-        this.borrowed = borrowed;
-        this.author = author;
-    }
+//    public Book(String title, int yearOfPublish, boolean borrowed, Author author) {
+//        this.title = title;
+//        this.yearOfPublish = yearOfPublish;
+//        this.borrowed = borrowed;
+//        this.author = author;
+//    }
 
     @Override
     public boolean equals(Object o) {

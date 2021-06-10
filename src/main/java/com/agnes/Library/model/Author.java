@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,9 @@ public final class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("id")
     private int id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
 
     @OneToMany(targetEntity = Book.class,
@@ -32,9 +35,9 @@ public final class Author {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    public void addBook(Book book) {
-        books.add(book);
-    }
+//    public void addBook(Book book) {
+//        books.add(book);
+//    }
     @Override
     public String toString() {
         return firstName + " " + lastName ;

@@ -1,9 +1,10 @@
 package com.agnes.Library.model;
 
-import com.sun.istack.NotNull;
+
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -28,11 +29,11 @@ public class Member  {
             fetch = FetchType.EAGER)
     private Book book;
 
-    public Member(String firstName, String lastName,
-                  int phoneNumber, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
+//    public Member(String firstName, String lastName,
+//                  int phoneNumber, String email) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.phoneNumber = phoneNumber;
+//        this.email = email;
+//    }
 }

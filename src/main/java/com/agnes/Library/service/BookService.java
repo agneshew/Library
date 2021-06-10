@@ -52,12 +52,15 @@ public class BookService {
     public Iterable<Book> getAllBooksFromDB() {
         return bookRepository.findAll(PageRequest.of(0,5));
     }
+
     public Book getBookById(int id) {
         return bookRepository.findById(id).orElseGet(() -> null);
     }
+
     public void deleteBookById(int id) {
         bookRepository.deleteById(id);
     }
+
     public Book updateBookInDB(Book book) {
         Optional<Book> bookOptional = Optional.ofNullable(getBookById(book.getId()));
         if (bookOptional.isPresent()) {
