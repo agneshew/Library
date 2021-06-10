@@ -20,37 +20,27 @@ public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
-    private MemberRepository memberRepository;
-    private AuthorRepository authorRepository;
+    private AuthorService authorService;
 
-    public Author getAuthorById(int id) {
-        return authorRepository.findById(id).orElseGet(() -> null);
-    }
-    private Optional<Author> isAuthorExistInDatabase(Integer authorId) {
-        return Optional.ofNullable(getAuthorById(authorId));
-    }
-    private Author addAuthor(String firstName, String lastname) {
-        return new Author(firstName, lastname);
-    }
 
     public Book addBookToDB(Book book) {
         Optional<Integer> authorId = Optional.ofNullable(book.getAuthor().getId());
-        if(authorId.isPresent()) {
-            Optional<Author> optionalAuthor = isAuthorExistInDatabase(authorId.get());
-            if(optionalAuthor.isPresent()){
+        if (authorId.isPresent()) {
+            Optional<Author> optionalAuthor = authorService.isAuthorExistInDatabase(authorId.get());
+            if (optionalAuthor.isPresent()) {
                 Author author = optionalAuthor.get();
                 author.addBook(book);
                 book.setAuthor(author);
-            }
-            else{
-                Author newAuthor = addAuthor(book.getAuthor().getFirstName(), book.getAuthor().getLastName());
+            } else {
+                Author newAuthor = authorService.addAuthor(book.getAuthor().getFirstName(), book.getAuthor().getLastName());
                 book.setAuthor(newAuthor);
             }
         }
         return bookRepository.save(book);
     }
+
     public Iterable<Book> getAllBooksFromDB() {
-        return bookRepository.findAll(PageRequest.of(0,5));
+        return bookRepository.findAll(PageRequest.of(0, 5));
     }
 
     public Book getBookById(int id) {
@@ -73,19 +63,10 @@ public class BookService {
         }
         return null;
     }
-    public void exportBooksToFile () {
+
+    public void exportBooksToFile() {
         Iterable<Book> bookIterable = getAllBooksFromDB();
         BookExcelExporter bookExcelExporter = new BookExcelExporter(bookIterable);
         bookExcelExporter.export();
     }
-    public void addMemberToDB(Member member) {
-        memberRepository.save(member);
-    }
-    public void deleteMemberFromDB(Member member) {
-        memberRepository.delete(member);
-    }
-    public Member getMemberById(int id) {
-        return memberRepository.findById(id).orElseGet(() -> null);
-    }
 }
-
